@@ -1,15 +1,16 @@
 {% extends 'rent/base.html' %}
 
-{% block content %} 
-   {% for post in posts %}
+{% block content %}
     <div class="post">
-	  {% if post.published_date %}
-        <div class="date">
-           <p>published: {{ post.published_date }}</p>
-        </div>
-	  {% endif %}
-        <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-        <p>{{ post.text|linebreaksbr }}</p>
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+		{% if user.is_authenticated %}
+            <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% endif %}
+		<h2>{{ post.cycle_number }}</h2>
+        <p>{{ post.cycle_detail|linebreaksbr }}</p>
     </div>
-   {% endfor %}
 {% endblock %}
