@@ -1,13 +1,25 @@
 {% extends 'rent/base.html' %}
 
 {% block content %} 
+
+   {% if user.is_authenticated %}
+    <p style="float:right">welcome {{ user.username }}</p>
+   {% endif %}
+   
+   <h1 align="center">Enjoy Cycle Riding @5 Rupees/hour only. </h1>
+   <br><br>
    {% for post in posts %}
-    <div class="post">
-        <div class="date">
-           <p>published: {{ post.published_date }}</p>
-        </div>
-        <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.cycle_number }}</a></h2>
-        <p>{{ post.cycle_detail|linebreaksbr }}</p>
+    <div class="col-md-6">
+  
+        <div class="polaroid">
+		  {% if post.image %}
+		    <img src="{{ post.image.url }}" alt="image-{{ post.cycle_number }}" style="width:100%">
+          {% endif %}
+		  <div class="insidepolaroid">
+		    <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.cycle_number }}</a></h2>
+          </div>
+		</div>
+		
     </div>
    {% endfor %}
 {% endblock %}

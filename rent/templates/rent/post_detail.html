@@ -2,15 +2,32 @@
 
 {% block content %}
     <div class="post">
+	    <br>
         {% if post.published_date %}
             <div class="date">
                 {{ post.published_date }}
             </div>
         {% endif %}
+		<br>
 		{% if user.is_authenticated %}
             <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         {% endif %}
-		<h2>{{ post.cycle_number }}</h2>
-        <p>{{ post.cycle_detail|linebreaksbr }}</p>
+		<div class="col-md-6">
+		<div class="polaroid">
+		  {% if post.image %}
+		    <img src="{{ post.image.url }}" alt="image-{{ post.cycle_number }}" style="width:100%">
+          {% endif %}
+		  <div class="insidepolaroid">
+		  <h2>{{ post.cycle_number }}</h2>
+		  </div>
+		</div>
+		</div>
+		<div class="col-md-6">
+		<h1>For renting cycle pay to the given paytm number, within 5 minutes of paying you will receive cycle-lock code on that number by sms. Thanks and Enjoy your ride. </h1>
+		<h2>=> After using you have to put the cycle at its right place from where you will take.</h2>
+		</div>
+		<br><br>
+		<h3> Paytm Number:  XXXXXXXXXX</h3>
+		<p>{{ post.cycle_detail|linebreaksbr }}</p>
     </div>
 {% endblock %}

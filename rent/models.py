@@ -11,7 +11,7 @@ class Post(models.Model):
     cycle_detail = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
-
+    image = models.ImageField(null=True, blank=True)
     def publish(self):
         self.published_date = timezone.now()
         self.save()
