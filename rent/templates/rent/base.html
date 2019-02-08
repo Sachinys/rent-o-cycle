@@ -2,7 +2,7 @@
 <html>
     
     <head>
-        <title>Django Renting</title>
+        <title>Rent-o-cycle</title>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -56,13 +56,18 @@ footer{ background: black;color:white;}
     <body>
         
         <ul>
-            <li><a class="active" href="/">Home</a></li>
-            <li><a href="#news">News</a></li>
+            <li><a class="active" href="/">Rentocycle</a></li>
+            
             <li><a href="#contact">Contact</a></li>
             <li><a href="#about">About</a></li>
-			<li style="float:right">{% if user.is_authenticated %}
+			<li style="float:right">
+			  {% if user.is_authenticated %}
                 <a href="{% url 'post_new' %}" ><span class="glyphicon glyphicon-plus"></span></a>
-            {% endif %}</li>
+                <p class="top-menu">Hello {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
+			  {% else %}
+                <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+              {% endif %}
+			</li>
         </ul>
 
         <div class="content container">
